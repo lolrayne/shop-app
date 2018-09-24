@@ -22,7 +22,7 @@ class Shop extends Component {
                     picture: '/images/purpgold_1.jpg',
                     price: '45',
                     type: 'shirt',
-                    id: '1'
+                    id: '2'
                 },
 
                 {
@@ -30,9 +30,36 @@ class Shop extends Component {
                     picture: '/images/leather_chains.jpg',
                     price: '150',
                     type: 'shirt',
-                    id: '1'
+                    id: '3'
                 }
-            ]
+            ],
+
+            pants: [
+                {
+                    name: "Dark Denim",
+                    picture: '/images/darkdenim_1.jpg',
+                    price: '95',
+                    type: 'pants',
+                    id: '4'
+                },
+
+                {
+                    name: "Acid Wash Denim",
+                    picture: '/images/aciddenim_1.jpg',
+                    price: '60',
+                    type: 'pants',
+                    id: '5'
+                },
+
+                {
+                    name: "Light Denim",
+                    picture: '/images/lightdenim_1.jpg',
+                    price: '125',
+                    type: 'pants',
+                    id: '6'
+                },
+            ],
         }
     }
+    
 }
