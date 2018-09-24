@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link} from 'react-router-dom';
-
+import Shirt from './Shirt'; 
+import Pants from './Pants';
+import Cart from './Cart';
+import axios from 'axios';
 
 
 class Shop extends Component {
@@ -12,7 +15,7 @@ class Shop extends Component {
             shirts: [
                 {
                     name: "Tommy Bahama",
-                    picture: '/images/tommy_1.jpg',
+                    picture: '/images/dress_1.jpg',
                     price: '30',
                     type: 'shirt',
                     id: '1' 
@@ -20,7 +23,7 @@ class Shop extends Component {
 
                 {
                     name: "Purple and Gold",
-                    picture: '/images/purpgold_1.jpg',
+                    picture: '/images/dress_2.jpg',
                     price: '45',
                     type: 'shirt',
                     id: '2'
@@ -28,7 +31,7 @@ class Shop extends Component {
 
                 {
                     name: "Leather with chains",
-                    picture: '/images/leather_chains.jpg',
+                    picture: '/images/dress_3.jpg',
                     price: '150',
                     type: 'shirt',
                     id: '3'
@@ -38,7 +41,7 @@ class Shop extends Component {
             pants: [
                 {
                     name: "Dark Denim",
-                    picture: '/images/darkdenim_1.jpg',
+                    picture: '/images/pant_1.jpg',
                     price: '95',
                     type: 'pants',
                     id: '4'
@@ -46,7 +49,7 @@ class Shop extends Component {
 
                 {
                     name: "Acid Wash Denim",
-                    picture: '/images/aciddenim_1.jpg',
+                    picture: '/images/pant_2.jpg',
                     price: '60',
                     type: 'pants',
                     id: '5'
@@ -54,7 +57,7 @@ class Shop extends Component {
 
                 {
                     name: "Light Denim",
-                    picture: '/images/lightdenim_1.jpg',
+                    picture: '/images/pant_3.jpg',
                     price: '125',
                     type: 'pants',
                     id: '6'
@@ -63,11 +66,46 @@ class Shop extends Component {
         }
     }
     
+    componentDidMount(){
+        //makes an axios call for your get request
+        let user = '';
+        if(localStorage.getItem('userName')){
+            user = localStorage.getItem('userName');
+        }
+            axios.get('http://localhost:8080/cart')
+            .then((res)=>{
+                this.setState({
+                    cart:res.data.cart,
+                    userName: user
+                })
+            })
+    }
+    addToCart = (product) => {
+        axios.post('http://localhost:8080/cart', product)
+        .then((res)=>{
+            this.setState({
+                cart: res.data.cart
+            })
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+    
     render(){
         return(
             <div>
                 <h1>Shop</h1>
                 <h2>Welcome!</h2>
+            <nav>
+                <Link to="/shop/shirt">Shirts</Link>
+                <Link to="/shop/pants">Pants</Link>
+            </nav>
+            <Cart cart={this.state.cart}/>
+            <Switch>
+                <Route path="/shop/shirts" render={()=><Shirt products={this.state.shirts} addToCart={this.addToCart}/>} /> 
+                <Route path="/shop/pants" render={()=><Pants products={this.state.pants} addToCart={this.addToCart}/>} /> 
+            </Switch>
             </div>
         )
     }

@@ -9,7 +9,7 @@ class Cart extends Component {
         return(
             <div>
                 <h3>Your Shopping Cart</h3>
-                { carrtJSX }
+                { cartJSX }
             </div>
         )
     }
