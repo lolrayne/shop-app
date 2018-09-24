@@ -9,7 +9,11 @@ class App extends Component {
     return (
       <div className="App">
         <nav>
+          <Link to="/"> Home </Link>
+          <Link to="/Shop"> Shop </Link>
         </nav>
+        <Route exact path="/" render={(props)=><Home history={props.history}/>} />
+        <Route path="/shop" render={()=><Shop/>} />
       </div>
     );
   }
