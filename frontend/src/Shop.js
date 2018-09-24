@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Switch, Route, Link} from 'react-router-dom';
 
 
 
@@ -62,4 +63,14 @@ class Shop extends Component {
         }
     }
     
+    render(){
+        return(
+            <div>
+                <h1>Shop</h1>
+                <h2>Welcome!</h2>
+            </div>
+        )
+    }
 }
+
+export default Shop;
